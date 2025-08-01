@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--<a href="https://www.flaticon.es/iconos-gratis/flecha-arriba" title="flecha arriba iconos">Flecha arriba iconos creados por Pixel perfect - Flaticon</a> -->
+ <!--<a href="https://www.flaticon.es/iconos-gratis/whatsapp" title="whatsapp iconos">Whatsapp iconos creados por Indygo - Flaticon</a> -->
+<title>Case House</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">Case House</div>
+
+    <div class="menu-toggle" id="menu-toggle">
+         <span></span>
+         <span></span>
+         <span></span>
+    </div>
+        <nav id="mobile-menu">
+         <ul>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#nosotros">Sobre nosotros</a></li>
+
+        <li><a href="#contacto">Contacto</a></li>
+        </ul>
+</nav>
+
+
+
+    <a class="whatsapp-btn" href="https://wa.me/598XXXXXXXX" target="_blank"><img src="imagenes/whatsapp.png" alt=""></a>
+  </header>
+
+<!--Hero-->
+  <section class="hero">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h1>Fundas y Accesorios para Todos los Modelos</h1>
+      <p>¡Protegé tu celular con estilo y confianza!</p>
+      <a href="#productos" class="cta">Ver Colección</a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Modal de colección -->
+<div class="overlay" id="overlay">
+ <div class="modal-card">
+  <button id="cerrarModal" class="cerrar-btn">&times;</button>
+  <h2>Colección</h2>
+  <div class="modal-productos">
+    <div class="producto-modal">
+      <img src="imagenes/iphone-13.jpeg" alt="iphone 13">
+      <h3>Funda iPhone 13 Transparente</h3>
+      <p>Protección total con diseño minimalista. Antigolpes.</p>
+      <span class="precio">$450</span>
+      <a class="btn-whatsapp" href="https://wa.me/598XXXXXXXX?text=Hola,%20me%20interesa%20la%20funda%20iPhone%2013" target="_blank">Comprar</a>
+    </div>
+    <div class="producto-modal">
+      <img src="imagenes/soporte-magne.webp" alt="Soporte magnetico">
+      <h3>Soporte Magnético Universal</h3>
+      <p>Ideal para el auto. Sujeta el celular con firmeza y estilo.</p>
+      <span class="precio">$320</span>
+      <a class="btn-whatsapp" href="https://wa.me/598XXXXXXXX?text=Hola,%20quiero%20comprar%20el%20soporte%20magnético" target="_blank">Comprar</a>
+    </div>
+    <div class="producto-modal">
+      <img src="imagenes/funda-s23.webp" alt="Funda Samsung S23">
+      <h3>Funda Silicona Samsung S23</h3>
+      <p>Suave al tacto, colores vibrantes. Protege sin abultar.</p>
+      <span class="precio">$480</span>
+      <a class="btn-whatsapp" href="https://wa.me/598XXXXXXXX?text=Hola,%20me%20interesa%20la%20funda%20para%20Samsung%20S23" target="_blank">Comprar</a>
+    </div>
+  </div>
+
+  <!-- Botón general -->
+  <div class="modal-footer">
+    <a href="https://wa.me/598XXXXXXXX?text=Hola,%20quiero%20ver%20más%20fundas%20y%20accesorios" target="_blank" class="btn-contacto-modal">Consultar stock</a>
+  </div>
+</div>
+
+</div>
+
+
+  <section id="productos" class="productos">
+    <h2>Productos Destacados</h2>
+    <div class="productos-grid">
+      <!-- Aquí irán los productos dinámicamente -->
+    </div>
+  </section>
+
+<!--Sobre nosotros-->
+<section class="sobre-nosotros" id="nosotros">
+  <div class="container">
+    <h2>Sobre Nosotros</h2>
+    <p>
+      Somos una tienda uruguaya apasionada por brindarte los mejores accesorios para tu celular. 
+      Desde fundas resistentes hasta soportes modernos, seleccionamos cada producto pensando en tu estilo y protección. 
+      Trabajamos con atención personalizada a través de WhatsApp y redes, y nos enfocamos en ofrecer calidad, precio y confianza en cada compra.
+    </p>
+  </div>
+</section>
+
+
+  <!-- Por que elegirnos-->
+  <section id="beneficios" class="beneficios">
+    <h2>¿Por qué elegirnos?</h2>
+    <ul>
+      <li>✅ Fundas para todos los modelos</li>
+      <li>🚚 Envíos a todo el país</li>
+      <li>📞 Atención personalizada por WhatsApp</li>
+    </ul>
+  </section>
+
+
+  <!--Faq-->
+<section class="faq" id="faq">
+  <div class="container">
+    <h2>Preguntas Frecuentes</h2>
+
+    <div class="faq-item">
+      <button class="faq-question">¿Hacen envíos a todo el país?</button>
+      <div class="faq-answer">
+        <p>Sí, realizamos envíos a todo Uruguay a través de correo o cadetería local.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">¿Qué medios de pago aceptan?</button>
+      <div class="faq-answer">
+        <p>Aceptamos pagos por transferencia, efectivo en mano y próximamente MercadoPago.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">¿Las fundas son originales?</button>
+      <div class="faq-answer">
+        <p>Trabajamos con fundas de alta calidad, seleccionadas por resistencia, diseño y ajuste al modelo.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">¿Puedo retirar en persona?</button>
+      <div class="faq-answer">
+        <p>Sí, podés coordinar para retirar en nuestro punto en Montevideo. Te indicamos por WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!--Contacto-->
+  <section id="contacto" class="contacto">
+    <h2>¿Tenés dudas o querés hacer un pedido?</h2>
+    <p>Escribinos directamente por WhatsApp o completá el siguiente formulario.</p>
+    <form>
+      <input type="text" placeholder="Tu nombre" required />
+      <input type="email" placeholder="Tu correo" required />
+      <textarea placeholder="Escribí tu mensaje..."></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 FundaShop - Todos los derechos reservados</p>
+    <div class="redes">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+    </div>
+  </footer>
+
+ <!-- Botón subir arriba -->
+<button id="btnSubirArriba" title="Volver arriba" aria-label="Subir arriba">
+   <img src="imagenes/flecha-hacia-arriba.png">
+</button>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
