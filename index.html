@@ -1,197 +1,273 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es-UY">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!--<a href="https://www.flaticon.es/iconos-gratis/flecha-arriba" title="flecha arriba iconos">Flecha arriba iconos creados por Pixel perfect - Flaticon</a> -->
- <!--<a href="https://www.flaticon.es/iconos-gratis/whatsapp" title="whatsapp iconos">Whatsapp iconos creados por Indygo - Flaticon</a> -->
-<title>Funda Shop</title>
+  <title>Funda Shop | Fundas y Accesorios para Celular en Uruguay</title>
+  <meta name="description" content="Funda Shop: fundas y accesorios para celular en Uruguay. Modelos para iPhone y Samsung, atención por WhatsApp y envíos a todo el país." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Funda Shop" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="canonical" href="https://www.fundashop.uy/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_UY" />
+  <meta property="og:site_name" content="Funda Shop" />
+  <meta property="og:title" content="Funda Shop | Fundas y Accesorios para Celular en Uruguay" />
+  <meta property="og:description" content="Encontrá fundas y accesorios para tu celular con atención personalizada y envíos a todo Uruguay." />
+  <meta property="og:url" content="https://www.fundashop.uy/" />
+  <meta property="og:image" content="https://www.fundashop.uy/imagenes/iphone-13.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Funda Shop | Fundas y Accesorios para Celular en Uruguay" />
+  <meta name="twitter:description" content="Protegé tu celular con estilo. Fundas y accesorios para múltiples modelos con compra por WhatsApp." />
+  <meta name="twitter:image" content="https://www.fundashop.uy/imagenes/iphone-13.jpeg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <header class="header" role="banner">
+    <div class="logo" aria-label="Funda Shop">Funda Shop</div>
 
-  <header class="header">
-    <div class="logo">Funda Shop</div>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú de navegación">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <div class="menu-toggle" id="menu-toggle">
-         <span></span>
-         <span></span>
-         <span></span>
-    </div>
-        <nav id="mobile-menu">
-         <ul>
+    <nav id="mobile-menu" aria-label="Navegación principal">
+      <ul>
         <li><a href="#productos">Productos</a></li>
         <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#resenas">Reseñas</a></li>
         <li><a href="#nosotros">Sobre nosotros</a></li>
-
+        <li><a href="#faq">Preguntas frecuentes</a></li>
         <li><a href="#contacto">Contacto</a></li>
-        </ul>
-</nav>
+      </ul>
+    </nav>
 
-
-
-    <a class="whatsapp-btn" href="https://wa.me/598XXXXXXXX" target="_blank"><img src="imagenes/whatsapp.png" alt=""></a>
+    <a class="whatsapp-btn" href="https://wa.me/59897431589" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">
+      <img src="imagenes/whatsapp.png" alt="WhatsApp" />
+    </a>
   </header>
 
-<!--Hero-->
-  <section class="hero">
-  <div class="hero-overlay">
-    <div class="hero-content">
-      <h1>Fundas y Accesorios para Todos los Modelos</h1>
-      <p>¡Protegé tu celular con estilo y confianza!</p>
-      <a href="#productos" class="cta">Ver Colección</a>
-    </div>
-  </div>
-</section>
+  <main id="contenido-principal">
+    <section class="hero" aria-label="Presentación principal">
+      <div class="hero-content">
+        <p class="hero-kicker">Tienda uruguaya</p>
+        <h1>Fundas y accesorios para todos los modelos</h1>
+        <p>Protegé tu celular con estilo, envíos rápidos y atención por WhatsApp.</p>
+        <div class="hero-actions">
+          <a href="#productos" class="cta">Ver Colección</a>
+          <a href="https://wa.me/59897431589" class="cta cta-secondary" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+        </div>
+      </div>
 
+      <div class="hero-showcase" aria-hidden="true">
+        <article class="hero-mini-card">
+          <img src="imagenes/iphone-13.jpeg" alt="Funda iPhone 13" />
+          <h3>iPhone 13</h3>
+        </article>
+        <article class="hero-mini-card">
+          <img src="imagenes/funda-s23.webp" alt="Funda Samsung S23" />
+          <h3>Samsung S23</h3>
+        </article>
+        <article class="hero-mini-card">
+          <img src="imagenes/soporte-magne.webp" alt="Soporte magnético para auto" />
+          <h3>Soporte para auto</h3>
+        </article>
+      </div>
+    </section>
 
-  <!-- Modal de colección -->
-<div class="overlay" id="overlay">
- <div class="modal-card">
-  <button id="cerrarModal" class="cerrar-btn">&times;</button>
-  <h2>Colección</h2>
-  <div class="modal-productos">
-    <div class="producto-modal">
-      <img src="imagenes/iphone-13.jpeg" alt="iphone 13">
-      <h3>Funda iPhone 13 Transparente</h3>
-      <p>Protección total con diseño minimalista. Antigolpes.</p>
-      <span class="precio">$450</span>
-      <a class="btn-whatsapp" href="https://wa.me/598XXXXXXXX?text=Hola,%20me%20interesa%20la%20funda%20iPhone%2013" target="_blank">Comprar</a>
-    </div>
-    <div class="producto-modal">
-      <img src="imagenes/soporte-magne.webp" alt="Soporte magnetico">
-      <h3>Soporte Magnético Universal</h3>
-      <p>Ideal para el auto. Sujeta el celular con firmeza y estilo.</p>
-      <span class="precio">$320</span>
-      <a class="btn-whatsapp" href="https://wa.me/598XXXXXXXX?text=Hola,%20quiero%20comprar%20el%20soporte%20magnético" target="_blank">Comprar</a>
-    </div>
-    <div class="producto-modal">
-      <img src="imagenes/funda-s23.webp" alt="Funda Samsung S23">
-      <h3>Funda Silicona Samsung S23</h3>
-      <p>Suave al tacto, colores vibrantes. Protege sin abultar.</p>
-      <span class="precio">$480</span>
-      <a class="btn-whatsapp" href="https://wa.me/598XXXXXXXX?text=Hola,%20me%20interesa%20la%20funda%20para%20Samsung%20S23" target="_blank">Comprar</a>
-    </div>
-  </div>
+    <div class="overlay" id="overlay" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+        <button id="cerrarModal" class="cerrar-btn" aria-label="Cerrar colección">&times;</button>
+        <h2 id="modal-titulo">Colección</h2>
 
-  <!-- Botón general -->
-  <div class="modal-footer">
-    <a href="https://wa.me/598XXXXXXXX?text=Hola,%20quiero%20ver%20más%20fundas%20y%20accesorios" target="_blank" class="btn-contacto-modal">Consultar stock</a>
-  </div>
-</div>
+        <div class="modal-productos">
+          <div class="producto-modal">
+            <img src="imagenes/iphone-13.jpeg" alt="Funda iPhone 13 transparente" />
+            <h3>Funda iPhone 13 Transparente</h3>
+            <p>Protección total con diseño minimalista. Antigolpes.</p>
+            <span class="precio">$450</span>
+            <a class="btn-whatsapp" href="checkout.html?name=Funda+iPhone+13+Transparente&price=450&sku=FS-IP13-TR&image=imagenes%2Fiphone-13.jpeg">Comprar</a>
+          </div>
 
-</div>
+          <div class="producto-modal">
+            <img src="imagenes/soporte-magne.webp" alt="Soporte magnético universal" />
+            <h3>Soporte Magnético Universal</h3>
+            <p>Ideal para el auto. Sujeta el celular con firmeza y estilo.</p>
+            <span class="precio">$320</span>
+            <a class="btn-whatsapp" href="checkout.html?name=Soporte+Magn%C3%A9tico+Universal&price=320&sku=FS-SOP-MAG&image=imagenes%2Fsoporte-magne.webp">Comprar</a>
+          </div>
 
+          <div class="producto-modal">
+            <img src="imagenes/funda-s23.webp" alt="Funda de silicona Samsung S23" />
+            <h3>Funda Silicona Samsung S23</h3>
+            <p>Suave al tacto, colores vibrantes. Protege sin abultar.</p>
+            <span class="precio">$480</span>
+            <a class="btn-whatsapp" href="checkout.html?name=Funda+Silicona+Samsung+S23&price=480&sku=FS-S23-SIL&image=imagenes%2Ffunda-s23.webp">Comprar</a>
+          </div>
 
-  <section id="productos" class="productos">
-    <h2>Productos Destacados</h2>
-    <div class="productos-grid">
-      <!-- Aquí irán los productos dinámicamente -->
-    </div>
-  </section>
+          <div class="producto-modal producto-modal-extra">
+            <img src="imagenes/iphone-13.jpeg" alt="Funda iPhone 13 antigolpes" />
+            <h3>Funda iPhone 13 Antigolpes</h3>
+            <p>Bordes reforzados para mayor protección en uso diario.</p>
+            <span class="precio">$520</span>
+            <a class="btn-whatsapp" href="checkout.html?name=Funda+iPhone+13+Antigolpes&price=520&sku=FS-IP13-ANT&image=imagenes%2Fiphone-13.jpeg">Comprar</a>
+          </div>
 
-<!--Sobre nosotros-->
-<section class="sobre-nosotros" id="nosotros">
-  <div class="container">
-    <h2>Sobre Nosotros</h2>
-    <p>
-      Somos una tienda uruguaya apasionada por brindarte los mejores accesorios para tu celular. 
-      Desde fundas resistentes hasta soportes modernos, seleccionamos cada producto pensando en tu estilo y protección. 
-      Trabajamos con atención personalizada a través de WhatsApp y redes, y nos enfocamos en ofrecer calidad, precio y confianza en cada compra.
-    </p>
-  </div>
-</section>
+          <div class="producto-modal producto-modal-extra">
+            <img src="imagenes/soporte-magne.webp" alt="Soporte magnético premium para auto" />
+            <h3>Soporte Magnético Premium</h3>
+            <p>Más firmeza y ajuste rápido para trayectos largos.</p>
+            <span class="precio">$390</span>
+            <a class="btn-whatsapp" href="checkout.html?name=Soporte+Magn%C3%A9tico+Premium&price=390&sku=FS-SOP-PRM&image=imagenes%2Fsoporte-magne.webp">Comprar</a>
+          </div>
 
+          <div class="producto-modal producto-modal-extra">
+            <img src="imagenes/funda-s23.webp" alt="Funda Samsung S23 reforzada" />
+            <h3>Funda Samsung S23 Reforzada</h3>
+            <p>Diseño resistente con excelente agarre y terminación mate.</p>
+            <span class="precio">$560</span>
+            <a class="btn-whatsapp" href="checkout.html?name=Funda+Samsung+S23+Reforzada&price=560&sku=FS-S23-REF&image=imagenes%2Ffunda-s23.webp">Comprar</a>
+          </div>
+        </div>
 
-  <!-- Por que elegirnos-->
-  <section id="beneficios" class="beneficios">
-    <h2>¿Por qué elegirnos?</h2>
-    <ul>
-      <li>✅ Fundas para todos los modelos</li>
-      <li>🚚 Envíos a todo el país</li>
-      <li>📞 Atención personalizada por WhatsApp</li>
-    </ul>
-  </section>
+        <div class="modal-actions">
+          <button id="ver-mas-modal" class="ver-mas-btn" type="button" aria-expanded="false">Ver más productos</button>
+        </div>
 
-
-  <!--Faq-->
-<section class="faq" id="faq">
-  <div class="container">
-    <h2>Preguntas Frecuentes</h2>
-
-    <div class="faq-item">
-      <button class="faq-question">¿Hacen envíos a todo el país?</button>
-      <div class="faq-answer">
-        <p>Sí, realizamos envíos a todo Uruguay a través de correo o cadetería local.</p>
+        <div class="modal-footer">
+          <a href="https://wa.me/59897431589?text=Hola,%20quiero%20ver%20m%C3%A1s%20fundas%20y%20accesorios" target="_blank" rel="noopener noreferrer" class="btn-contacto-modal">Consultar stock</a>
+        </div>
       </div>
     </div>
 
-    <div class="faq-item">
-      <button class="faq-question">¿Qué medios de pago aceptan?</button>
-      <div class="faq-answer">
-        <p>Aceptamos pagos por transferencia, efectivo en mano y próximamente MercadoPago.</p>
+    <section id="productos" class="productos">
+      <h2>Productos destacados</h2>
+      <div class="productos-grid"></div>
+      <button id="ver-mas-productos" class="ver-mas-btn" type="button">Ver más productos</button>
+    </section>
+
+    <section class="beneficios" id="beneficios">
+      <h2>¿Por qué elegirnos?</h2>
+      <ul>
+        <li>Fundas para todos los modelos</li>
+        <li>Envíos rápidos a todo Uruguay</li>
+        <li>Precios competitivos y promociones</li>
+        <li>Atención personalizada por WhatsApp</li>
+      </ul>
+    </section>
+
+    <section class="resenas" id="resenas" aria-labelledby="titulo-resenas">
+      <div class="container">
+        <h2 id="titulo-resenas">Lo que dicen nuestros clientes</h2>
+        <p class="resenas-intro">Opiniones reales de compras recientes en Funda Shop.</p>
+        <div class="resenas-grid" id="resenas-grid"></div>
+      </div>
+    </section>
+
+    <section class="sobre-nosotros" id="nosotros">
+      <div class="container">
+        <h2>Sobre nosotros</h2>
+        <p>
+          Somos una tienda uruguaya apasionada por brindarte los mejores accesorios para tu celular.
+          Desde fundas resistentes hasta soportes modernos, seleccionamos cada producto pensando en tu estilo y protección.
+          Trabajamos con atención personalizada a través de WhatsApp y redes, y nos enfocamos en ofrecer calidad, precio y confianza en cada compra.
+        </p>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">¿Hacen envíos a todo el país?</button>
+          <div class="faq-answer">
+            <p>Sí, realizamos envíos a todo Uruguay a través de correo o cadetería local.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">¿Qué medios de pago aceptan?</button>
+          <div class="faq-answer">
+            <p>Aceptamos pagos por transferencia, efectivo en mano y próximamente MercadoPago.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">¿Las fundas son originales?</button>
+          <div class="faq-answer">
+            <p>Trabajamos con fundas de alta calidad, seleccionadas por resistencia, diseño y ajuste al modelo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">¿Puedo retirar en persona?</button>
+          <div class="faq-answer">
+            <p>Sí, podés coordinar para retirar en nuestro punto en Montevideo. Te indicamos por WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="contacto">
+      <h2>¿Tenés dudas o querés hacer un pedido?</h2>
+      <p>Escribinos directamente por WhatsApp o completá el siguiente formulario.</p>
+      <form id="contacto-form" aria-label="Formulario de contacto" action="https://formspree.io/f/xlgwvwad" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Nuevo mensaje desde Funda Shop" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true" />
+        <input type="hidden" name="form_started_at" id="form-started-at" value="" />
+        <input type="text" name="nombre" autocomplete="name" placeholder="Tu nombre" aria-label="Tu nombre" minlength="2" maxlength="60" required />
+        <input type="email" name="email" autocomplete="email" placeholder="Tu correo" aria-label="Tu correo" maxlength="120" required />
+        <textarea name="mensaje" placeholder="Escribí tu mensaje..." aria-label="Tu mensaje" minlength="10" maxlength="700" required></textarea>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+      <p>&copy; 2026 <strong>Funda Shop</strong> - Todos los derechos reservados.</p>
+
+      <div class="redes">
+        <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="https://img.icons8.com/ios-filled/25/ffffff/instagram-new--v1.png" alt="Instagram" />
+        </a>
+        <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <img src="https://img.icons8.com/ios-filled/25/ffffff/facebook--v1.png" alt="Facebook" />
+        </a>
+        <a href="https://wa.me/59897431589" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <img src="https://img.icons8.com/ios-filled/25/ffffff/whatsapp--v1.png" alt="WhatsApp" />
+        </a>
       </div>
     </div>
+  </footer>
 
-    <div class="faq-item">
-      <button class="faq-question">¿Las fundas son originales?</button>
-      <div class="faq-answer">
-        <p>Trabajamos con fundas de alta calidad, seleccionadas por resistencia, diseño y ajuste al modelo.</p>
-      </div>
-    </div>
+  <button id="btnSubirArriba" title="Volver arriba" aria-label="Subir arriba">
+    <img src="imagenes/flecha-hacia-arriba.png" alt="Subir arriba" />
+  </button>
 
-    <div class="faq-item">
-      <button class="faq-question">¿Puedo retirar en persona?</button>
-      <div class="faq-answer">
-        <p>Sí, podés coordinar para retirar en nuestro punto en Montevideo. Te indicamos por WhatsApp.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-<!--Contacto-->
-  <section id="contacto" class="contacto">
-    <h2>¿Tenés dudas o querés hacer un pedido?</h2>
-    <p>Escribinos directamente por WhatsApp o completá el siguiente formulario.</p>
-    <form>
-      <input type="text" placeholder="Tu nombre" required />
-      <input type="email" placeholder="Tu correo" required />
-      <textarea placeholder="Escribí tu mensaje..."></textarea>
-      <button type="submit">Enviar</button>
-    </form>
-  </section>
-
-<!--Footer-->
-
-<footer class="footer">
-  <div class="footer-container">
-    <p>&copy; 2025 <strong>FundaShop</strong> — Todos los derechos reservados.</p>
-
-    <div class="redes">
-      <a href="https://instagram.com/" target="_blank" aria-label="Instagram">
-        <img src="https://img.icons8.com/ios-filled/25/ffffff/instagram-new--v1.png" alt="Instagram" />
-      </a>
-      <a href="https://facebook.com/" target="_blank" aria-label="Facebook">
-        <img src="https://img.icons8.com/ios-filled/25/ffffff/facebook--v1.png" alt="Facebook" />
-      </a>
-      <a href="https://wa.me/598XXXXXXXX" target="_blank" aria-label="WhatsApp">
-        <img src="https://img.icons8.com/ios-filled/25/ffffff/whatsapp--v1.png" alt="WhatsApp" />
-      </a>
-    </div>
-  </div>
-</footer>
-
-
- <!-- Botón subir arriba -->
-<button id="btnSubirArriba" title="Volver arriba" aria-label="Subir arriba">
-   <img src="imagenes/flecha-hacia-arriba.png">
-</button>
-
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Funda Shop",
+      "url": "https://www.fundashop.uy/",
+      "image": "https://www.fundashop.uy/imagenes/iphone-13.jpeg",
+      "description": "Tienda de fundas y accesorios para celulares en Uruguay.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Montevideo",
+        "addressCountry": "UY"
+      },
+      "sameAs": [
+        "https://instagram.com/",
+        "https://facebook.com/"
+      ]
+    }
+  </script>
 
   <script src="script.js"></script>
-
 </body>
 </html>

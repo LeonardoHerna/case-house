@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es-UY">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | Funda Shop</title>
+  <meta name="description" content="Finalizá tu compra en Funda Shop con envío y método de pago." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="checkout-page">
+  <header class="header" role="banner">
+    <a class="logo" href="index.html" aria-label="Volver a Funda Shop">Funda Shop</a>
+    <nav aria-label="Navegación checkout">
+      <ul>
+        <li><a href="index.html#productos">Seguir comprando</a></li>
+        <li><a href="index.html#contacto">Soporte</a></li>
+      </ul>
+    </nav>
+    <a class="whatsapp-btn" href="https://wa.me/59897431589" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">
+      <img src="imagenes/whatsapp.png" alt="WhatsApp" />
+    </a>
+  </header>
+
+  <main class="checkout-main" id="contenido-principal">
+    <section class="checkout-hero" aria-label="Finalizar compra">
+      <p class="hero-kicker">Compra segura</p>
+      <h1>Finalizá tu pedido</h1>
+      <p>Completá tus datos, elegí envío y método de pago para confirmar la compra.</p>
+    </section>
+
+    <section class="checkout-layout" aria-label="Resumen y formulario de compra">
+      <article class="checkout-card checkout-producto">
+        <h2>Tu producto</h2>
+        <div class="checkout-producto-info">
+          <img id="checkout-image" src="imagenes/iphone-13.jpeg" alt="Producto seleccionado" />
+          <div>
+            <h3 id="checkout-name">Producto</h3>
+            <p class="checkout-sku">SKU: <span id="checkout-sku">-</span></p>
+            <p class="checkout-precio">$<span id="checkout-price">0</span></p>
+          </div>
+        </div>
+
+        <label for="cantidad" class="checkout-label">Cantidad</label>
+        <input id="cantidad" name="cantidad" type="number" min="1" max="10" value="1" />
+
+        <div class="checkout-total-row">
+          <span>Subtotal</span>
+          <strong>$<span id="checkout-subtotal">0</span></strong>
+        </div>
+        <div class="checkout-total-row">
+          <span>Envío</span>
+          <strong id="checkout-shipping">$0</strong>
+        </div>
+        <div class="checkout-total-row checkout-total-final">
+          <span>Total</span>
+          <strong>$<span id="checkout-total">0</span></strong>
+        </div>
+      </article>
+
+      <article class="checkout-card">
+        <h2>Datos de compra</h2>
+        <form id="checkout-form" novalidate>
+          <div class="checkout-grid">
+            <label>
+              Nombre completo
+              <input type="text" name="nombre" minlength="2" maxlength="60" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" maxlength="120" required />
+            </label>
+            <label>
+              Teléfono
+              <input type="tel" name="telefono" minlength="8" maxlength="20" required />
+            </label>
+            <label>
+              Departamento
+              <input type="text" name="departamento" maxlength="40" required />
+            </label>
+          </div>
+
+          <label>
+            Dirección de entrega
+            <input type="text" name="direccion" minlength="6" maxlength="140" required />
+          </label>
+
+          <fieldset class="checkout-fieldset">
+            <legend>Tipo de entrega</legend>
+            <label><input type="radio" name="envio" value="domicilio" checked /> Envío a domicilio ($120)</label>
+            <label><input type="radio" name="envio" value="retiro" /> Retiro en Montevideo (sin costo)</label>
+          </fieldset>
+
+          <fieldset class="checkout-fieldset">
+            <legend>Método de pago</legend>
+            <label><input type="radio" name="pago" value="mercadopago" checked /> Mercado Pago</label>
+            <label><input type="radio" name="pago" value="tarjeta" /> Tarjeta de débito/crédito</label>
+            <label><input type="radio" name="pago" value="transferencia" /> Transferencia bancaria</label>
+          </fieldset>
+
+          <label>
+            Notas del pedido (opcional)
+            <textarea name="notas" maxlength="260" placeholder="Color, modelo exacto, horario de entrega, etc."></textarea>
+          </label>
+
+          <p id="checkout-status" class="form-status" role="status" aria-live="polite"></p>
+          <button class="checkout-submit" type="submit">Confirmar compra</button>
+        </form>
+
+        <div id="checkout-confirmacion" class="checkout-confirmacion" hidden>
+          <h3>Pedido confirmado</h3>
+          <p>Tu número de pedido es <strong id="checkout-order-id"></strong>.</p>
+          <p>En breve te contactamos con el estado del pago y envío.</p>
+          <a id="checkout-whatsapp" class="btn-contacto-modal" href="#" target="_blank" rel="noopener noreferrer">Enviar pedido por WhatsApp</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+      <p>&copy; 2026 <strong>Funda Shop</strong> - Todos los derechos reservados.</p>
+      <div class="redes">
+        <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="https://img.icons8.com/ios-filled/25/ffffff/instagram-new--v1.png" alt="Instagram" />
+        </a>
+        <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <img src="https://img.icons8.com/ios-filled/25/ffffff/facebook--v1.png" alt="Facebook" />
+        </a>
+        <a href="https://wa.me/59897431589" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <img src="https://img.icons8.com/ios-filled/25/ffffff/whatsapp--v1.png" alt="WhatsApp" />
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="checkout.js"></script>
+</body>
+</html>
