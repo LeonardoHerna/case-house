@@ -1,15 +1,12 @@
-﻿const DEFAULT_WHATSAPP = "59897431589";
+// Configuracion base del frontend para comunicarse con backend y WhatsApp.
+const API_BASE_URL = "http://localhost:3000";
+const DEFAULT_WHATSAPP = "59897431589";
 const SHIPPING_COSTS = {
   domicilio: 120,
   retiro: 0
 };
 
-// Links manuales de pago (sin backend dinamico).
-const PAYMENT_LINKS = {
-  mercadopago: "https://link.mercadopago.com.uy/fundashop"
-};
-
-// Referencias del DOM para producto, formulario y resumen.
+// Referencias del DOM para producto, formulario, estado y confirmacion final.
 const checkoutName = document.getElementById("checkout-name");
 const checkoutSku = document.getElementById("checkout-sku");
 const checkoutPrice = document.getElementById("checkout-price");
@@ -25,14 +22,13 @@ const orderIdElement = document.getElementById("checkout-order-id");
 const whatsappLink = document.getElementById("checkout-whatsapp");
 const paymentMessageElement = document.getElementById("checkout-payment-message");
 const payOnlineButton = document.getElementById("checkout-pay-online");
-const paymentLinkNotice = document.getElementById("payment-link-notice");
 const paymentPanels = {
   mercadopago: document.getElementById("payment-panel-mercadopago"),
   transferencia: document.getElementById("payment-panel-transferencia")
 };
 
-const params = new URLSearchParams(window.location.search);
 // Producto recibido por query params desde la home.
+const params = new URLSearchParams(window.location.search);
 const product = {
   name: params.get("name") || "Producto Funda Shop",
   sku: params.get("sku") || "SIN-SKU",
@@ -41,13 +37,8 @@ const product = {
 };
 
 function formatUYU(value) {
-  // Normaliza montos a enteros para mostrar en UI.
-  return Math.round(value);
-}
-
-function isConfiguredUrl(url) {
-  // Valida que exista un link HTTP/HTTPS configurado.
-  return /^https?:\/\//.test(url || "");
+  // Normaliza montos a entero para mostrar en UI.
+  return Math.round(Number(value || 0));
 }
 
 function getShippingValue() {
@@ -61,55 +52,13 @@ function getSelectedPaymentMethod() {
   return checkoutForm?.elements?.pago?.value || "mercadopago";
 }
 
-function getPaymentMethodLabel(method) {
-  // Etiqueta legible para mensajes de estado de pago.
-  if (method === "transferencia") return "transferencia bancaria";
-  return "Mercado Pago";
-}
-
-function buildPaymentUrl(baseUrl, total, reference) {
-  // Arma URL final agregando referencia, monto y descripcion.
-  if (!isConfiguredUrl(baseUrl)) return "";
-
-  const parsed = new URL(baseUrl);
-  parsed.searchParams.set("external_reference", reference);
-  parsed.searchParams.set("amount", String(formatUYU(total)));
-  parsed.searchParams.set("description", product.name);
-  return parsed.toString();
-}
-
 function updateMethodPanels() {
-  // Muestra panel informativo segun metodo de pago.
+  // Muestra solo el panel informativo del metodo elegido por el cliente.
   const selected = getSelectedPaymentMethod();
-
   Object.entries(paymentPanels).forEach(([key, panel]) => {
     if (!panel) return;
     panel.hidden = key !== selected;
   });
-}
-
-function updatePaymentLinks(total) {
-  // Actualiza mensaje de disponibilidad del metodo online.
-  const reference = `PRE-${product.sku}-${Date.now().toString().slice(-6)}`;
-  const mercadopagoUrl = buildPaymentUrl(PAYMENT_LINKS.mercadopago, total, reference);
-
-  const selected = getSelectedPaymentMethod();
-  if (!paymentLinkNotice) return;
-
-  if (selected === "mercadopago" && !mercadopagoUrl) {
-    paymentLinkNotice.textContent = "Para activar este medio online, agrega tu link real de pago en PAYMENT_LINKS dentro de checkout.js.";
-    paymentLinkNotice.classList.add("error");
-    return;
-  }
-
-  if (selected === "transferencia") {
-    paymentLinkNotice.textContent = "Verifica los datos de cuenta y envia el comprobante por WhatsApp.";
-    paymentLinkNotice.classList.remove("error");
-    return;
-  }
-
-  paymentLinkNotice.textContent = "Metodo online disponible. Puedes continuar al pago cuando confirmes el pedido.";
-  paymentLinkNotice.classList.remove("error");
 }
 
 function updateTotals() {
@@ -124,7 +73,6 @@ function updateTotals() {
   checkoutSubtotal.textContent = String(formatUYU(subtotal));
   checkoutShipping.textContent = shipping === 0 ? "Gratis" : `$${formatUYU(shipping)}`;
   checkoutTotal.textContent = String(formatUYU(total));
-  updatePaymentLinks(total);
 }
 
 function setInitialProductData() {
@@ -134,7 +82,6 @@ function setInitialProductData() {
   checkoutPrice.textContent = String(formatUYU(product.price));
   checkoutImage.src = product.image;
   checkoutImage.alt = product.name;
-
   updateMethodPanels();
   updateTotals();
 }
@@ -144,13 +91,6 @@ function setStatus(message, type) {
   checkoutStatus.textContent = message;
   checkoutStatus.classList.remove("error", "success");
   if (type) checkoutStatus.classList.add(type);
-}
-
-function createOrderId() {
-  // Genera un identificador simple para seguimiento del pedido.
-  const now = new Date();
-  const random = Math.floor(1000 + Math.random() * 9000);
-  return `FS-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}-${random}`;
 }
 
 function validateForm(data) {
@@ -179,16 +119,8 @@ function buildWhatsAppUrl(order) {
   return `https://wa.me/${DEFAULT_WHATSAPP}?text=${encodeURIComponent(text)}`;
 }
 
-function getPaymentUrlForMethod(method, total, orderId) {
-  // Devuelve URL de pago solo para metodos online.
-  if (method === "transferencia") return "";
-
-  const baseUrl = PAYMENT_LINKS[method] || "";
-  return buildPaymentUrl(baseUrl, total, orderId);
-}
-
 function renderPaymentMessage(order, paymentUrl) {
-  // Ajusta el bloque de confirmacion segun estado/metodo de pago.
+  // Ajusta confirmacion para mostrar boton Pagar ahora solo cuando aplica.
   if (!paymentMessageElement || !payOnlineButton) return;
 
   if (order.pago === "transferencia") {
@@ -198,19 +130,38 @@ function renderPaymentMessage(order, paymentUrl) {
   }
 
   if (paymentUrl) {
-    paymentMessageElement.textContent = `Estado de pago: pendiente. Completa el pago con ${getPaymentMethodLabel(order.pago)}.`;
+    paymentMessageElement.textContent = "Estado de pago: pendiente. Completa el pago con el boton Pagar ahora.";
     payOnlineButton.href = paymentUrl;
     payOnlineButton.hidden = false;
     return;
   }
 
-  paymentMessageElement.textContent = "Estado de pago: pendiente. Falta configurar el link de pago online en checkout.js.";
+  paymentMessageElement.textContent = "Estado de pago: pendiente. No se pudo generar el link de Mercado Pago.";
   payOnlineButton.hidden = true;
+}
+
+function showMercadoPagoReturnStatus() {
+  // Muestra resultado de retorno cuando Mercado Pago redirige de vuelta al checkout.
+  const status = params.get("status");
+  if (!status) return;
+
+  if (status === "success") {
+    setStatus("Pago aprobado por Mercado Pago.", "success");
+    return;
+  }
+  if (status === "pending") {
+    setStatus("Pago pendiente de confirmacion en Mercado Pago.", "success");
+    return;
+  }
+  if (status === "failure") {
+    setStatus("El pago fue rechazado o cancelado. Puedes intentarlo nuevamente.", "error");
+  }
 }
 
 if (checkoutForm) {
   // Inicializacion de checkout y listeners de cambios del formulario.
   setInitialProductData();
+  showMercadoPagoReturnStatus();
 
   cantidadInput.addEventListener("input", updateTotals);
 
@@ -219,14 +170,11 @@ if (checkoutForm) {
   });
 
   checkoutForm.querySelectorAll('input[name="pago"]').forEach((radio) => {
-    radio.addEventListener("change", () => {
-      updateMethodPanels();
-      updateTotals();
-    });
+    radio.addEventListener("change", updateMethodPanels);
   });
 
   checkoutForm.addEventListener("submit", async (event) => {
-    // Flujo principal: valida, crea pedido local y prepara accion de pago.
+    // Flujo principal: valida, crea pedido en backend y renderiza confirmacion.
     event.preventDefault();
     setStatus("", null);
 
@@ -249,44 +197,74 @@ if (checkoutForm) {
     }
 
     const quantity = Number(cantidadInput.value || 1);
-    const subtotal = product.price * quantity;
-    const shipping = SHIPPING_COSTS[payload.envio] ?? 0;
-    const total = subtotal + shipping;
-    const orderId = createOrderId();
+    const shippingCost = SHIPPING_COSTS[payload.envio] ?? 0;
 
-    const order = {
-      orderId,
-      fecha: new Date().toISOString(),
-      producto: product.name,
-      sku: product.sku,
-      precioUnitario: product.price,
-      cantidad: quantity,
-      subtotal,
-      shipping,
-      total,
-      paymentUrl: "",
-      paymentStatus: "pending_manual",
-      ...payload
+    // Payload que backend usa para crear orden en MongoDB y preferencia MP.
+    const orderRequest = {
+      customer: {
+        fullName: payload.nombre,
+        email: payload.email,
+        phone: payload.telefono,
+        department: payload.departamento,
+        address: payload.direccion
+      },
+      shipping: {
+        type: payload.envio,
+        cost: shippingCost
+      },
+      payment: {
+        method: payload.pago
+      },
+      item: {
+        name: product.name,
+        sku: product.sku,
+        image: product.image,
+        quantity,
+        unitPrice: product.price
+      },
+      notes: payload.notas
     };
 
-    order.paymentUrl = getPaymentUrlForMethod(payload.pago, total, orderId);
-    order.paymentStatus = order.paymentUrl ? "pending_online" : "pending_manual";
+    try {
+      // Crea pedido real en backend y obtiene estado + URL de pago online.
+      const response = await fetch(`${API_BASE_URL}/api/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(orderRequest)
+      });
 
-    const existing = JSON.parse(localStorage.getItem("fundashop_orders") || "[]");
-    // Persistencia local temporal del pedido en el navegador.
-    existing.push(order);
-    localStorage.setItem("fundashop_orders", JSON.stringify(existing));
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.detail || data?.error || "No se pudo crear el pedido.");
+      }
 
-    orderIdElement.textContent = orderId;
-    whatsappLink.href = buildWhatsAppUrl(order);
-    renderPaymentMessage(order, order.paymentUrl);
-    confirmationBox.hidden = false;
+      // Estructura local para confirmacion visual y mensaje por WhatsApp.
+      const order = {
+        orderId: data.orderId,
+        producto: product.name,
+        sku: product.sku,
+        cantidad: quantity,
+        total: formatUYU(data.total),
+        pago: payload.pago === "transferencia" ? "Transferencia bancaria" : "Mercado Pago",
+        nombre: payload.nombre,
+        telefono: payload.telefono
+      };
 
-    checkoutForm.reset();
-    cantidadInput.value = "1";
-    updateMethodPanels();
-    updateTotals();
+      orderIdElement.textContent = order.orderId;
+      whatsappLink.href = buildWhatsAppUrl(order);
+      renderPaymentMessage(order, data.paymentUrl || "");
+      confirmationBox.hidden = false;
 
-    setStatus("Pedido confirmado. Revisa el detalle de pago y finaliza el proceso.", "success");
+      checkoutForm.reset();
+      cantidadInput.value = "1";
+      updateMethodPanels();
+      updateTotals();
+
+      setStatus("Pedido confirmado. Revisa el detalle y continua con el pago si corresponde.", "success");
+    } catch (error) {
+      setStatus(error.message || "No se pudo confirmar el pedido.", "error");
+    }
   });
 }
