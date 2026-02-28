@@ -87,6 +87,7 @@ const TEXTO_VER_MENOS = "Ver menos";
 let productosMostrados = 0;
 
 function crearLinkCheckout(prod) {
+  // Construye la URL del checkout con query params del producto seleccionado.
   const params = new URLSearchParams({
     name: prod.nombre,
     price: String(prod.precio || 0),
@@ -97,6 +98,7 @@ function crearLinkCheckout(prod) {
 }
 
 function crearCardProducto(prod) {
+  // Crea la card HTML que se inyecta en la grilla principal.
   const card = document.createElement("article");
   card.classList.add("producto-card");
 
@@ -111,6 +113,7 @@ function crearCardProducto(prod) {
 }
 
 function actualizarBotonVerMas() {
+  // Ajusta el estado del boton: ver mas, ver menos u oculto.
   if (!btnVerMasProductos) return;
 
   const hayMasProductos = productosMostrados < productos.length;
@@ -134,6 +137,7 @@ function actualizarBotonVerMas() {
 }
 
 function renderizarMasProductos(cantidad) {
+  // Inserta un bloque incremental de productos en pantalla.
   if (!contenedorProductos) return;
 
   const siguientes = productos.slice(productosMostrados, productosMostrados + cantidad);
@@ -147,10 +151,12 @@ function renderizarMasProductos(cantidad) {
 }
 
 if (contenedorProductos) {
+  // Primer render al cargar la pagina.
   renderizarMasProductos(PRODUCTOS_INICIALES);
 }
 
 if (btnVerMasProductos) {
+  // Comportamiento del boton para expandir o resetear la grilla.
   btnVerMasProductos.addEventListener("click", () => {
     if (btnVerMasProductos.dataset.mode === "less") {
       contenedorProductos.innerHTML = "";
@@ -166,6 +172,7 @@ if (btnVerMasProductos) {
 const contenedorResenas = document.getElementById("resenas-grid");
 
 if (contenedorResenas) {
+  // Renderizado de reseñas.
   resenas.forEach((item) => {
     const card = document.createElement("article");
     card.classList.add("resena-card");
@@ -185,12 +192,39 @@ if (contenedorResenas) {
 
 const toggle = document.getElementById("menu-toggle");
 const menu = document.getElementById("mobile-menu");
+const navProducts = document.querySelector(".nav-products");
+const navProductsToggle = document.querySelector(".nav-dropdown-toggle");
+const navProductsLinks = document.querySelectorAll(".nav-submenu a");
 
 if (toggle && menu) {
+  // Abre/cierra el menu hamburguesa en mobile.
   toggle.addEventListener("click", () => {
     const isOpen = menu.classList.toggle("active");
     toggle.classList.toggle("rotated");
     toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+}
+
+if (navProducts && navProductsToggle) {
+  // Abre/cierra submenu de categorias en click (util para mobile y teclado).
+  navProductsToggle.addEventListener("click", () => {
+    const isOpen = navProducts.classList.toggle("open");
+    navProductsToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  document.addEventListener("click", (event) => {
+    // Cierra submenu al hacer click fuera.
+    if (navProducts.contains(event.target)) return;
+    navProducts.classList.remove("open");
+    navProductsToggle.setAttribute("aria-expanded", "false");
+  });
+
+  navProductsLinks.forEach((link) => {
+    // Cierra submenu al elegir una categoria.
+    link.addEventListener("click", () => {
+      navProducts.classList.remove("open");
+      navProductsToggle.setAttribute("aria-expanded", "false");
+    });
   });
 }
 
@@ -201,6 +235,7 @@ const btnVerMasModal = document.getElementById("ver-mas-modal");
 const productosExtraModal = document.querySelectorAll(".producto-modal-extra");
 
 function resetearProductosModal() {
+  // Devuelve el modal al estado inicial (sin productos extra visibles).
   if (!btnVerMasModal) return;
   productosExtraModal.forEach((item) => item.classList.remove("is-visible"));
   btnVerMasModal.textContent = "Ver mas productos";
@@ -209,6 +244,7 @@ function resetearProductosModal() {
 }
 
 if (btnVerMasModal && productosExtraModal.length) {
+  // Toggle de productos extra dentro del modal.
   resetearProductosModal();
 
   btnVerMasModal.addEventListener("click", () => {
@@ -224,6 +260,7 @@ if (btnVerMasModal && productosExtraModal.length) {
 }
 
 if (ctaBtn && overlay && cerrarModal) {
+  // Apertura y cierre del modal principal.
   ctaBtn.addEventListener("click", (e) => {
     e.preventDefault();
     overlay.classList.add("active");
@@ -247,6 +284,7 @@ if (ctaBtn && overlay && cerrarModal) {
 
 const preguntas = document.querySelectorAll(".faq-question");
 
+// Acordeon FAQ: abre una respuesta por vez.
 preguntas.forEach((pregunta) => {
   pregunta.addEventListener("click", () => {
     const activa = pregunta.classList.contains("active");
@@ -269,6 +307,7 @@ preguntas.forEach((pregunta) => {
 const btnSubir = document.getElementById("btnSubirArriba");
 
 if (btnSubir) {
+  // Boton flotante de volver arriba.
   window.addEventListener("scroll", () => {
     if (window.scrollY > 300) {
       btnSubir.style.display = "flex";
@@ -284,12 +323,14 @@ if (btnSubir) {
 
 const seccionesScroll = document.querySelectorAll("main section:not(.hero)");
 
+// Marca secciones para animacion de entrada progresiva.
 seccionesScroll.forEach((seccion, index) => {
   seccion.classList.add("scroll-reveal");
   seccion.style.setProperty("--reveal-delay", `${Math.min(index * 70, 300)}ms`);
 });
 
 if ("IntersectionObserver" in window) {
+  // Activa animaciones cuando cada seccion entra en viewport.
   const observerSecciones = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
@@ -306,6 +347,7 @@ if ("IntersectionObserver" in window) {
 
   seccionesScroll.forEach((seccion) => observerSecciones.observe(seccion));
 } else {
+  // Fallback para navegadores sin IntersectionObserver.
   seccionesScroll.forEach((seccion) => seccion.classList.add("is-visible"));
 }
 
@@ -314,6 +356,7 @@ const formStatus = document.getElementById("form-status");
 const startedAtInput = document.getElementById("form-started-at");
 
 if (contactoForm && formStatus && startedAtInput) {
+  // Timestamp inicial para frenar envios demasiado rapidos (anti-bot basico).
   startedAtInput.value = String(Date.now());
 
   const nombreInput = contactoForm.elements.nombre;
@@ -323,20 +366,24 @@ if (contactoForm && formStatus && startedAtInput) {
   const submitBtn = contactoForm.querySelector('button[type="submit"]');
 
   const setStatus = (msg, type) => {
+    // Muestra mensajes de validacion/resultado al usuario.
     formStatus.textContent = msg;
     formStatus.classList.remove("error", "success");
     if (type) formStatus.classList.add(type);
   };
 
   const marcarError = (input) => {
+    // Resalta visualmente un campo invalido.
     if (input) input.classList.add("input-error");
   };
 
   const limpiarErrores = () => {
+    // Limpia estilos de error antes de cada validacion.
     contactoForm.querySelectorAll(".input-error").forEach((el) => el.classList.remove("input-error"));
   };
 
   contactoForm.addEventListener("submit", async (e) => {
+    // Flujo de validacion y envio del formulario de contacto.
     e.preventDefault();
     limpiarErrores();
     setStatus("", null);

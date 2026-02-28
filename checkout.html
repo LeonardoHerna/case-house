@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es-UY">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Checkout | Funda Shop</title>
-  <meta name="description" content="Finalizá tu compra en Funda Shop con envío y método de pago." />
+  <meta name="description" content="Finaliza tu compra en Funda Shop con envio y metodo de pago." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="checkout-page">
   <header class="header" role="banner">
     <a class="logo" href="index.html" aria-label="Volver a Funda Shop">Funda Shop</a>
-    <nav aria-label="Navegación checkout">
+    <nav aria-label="Navegacion checkout">
       <ul>
         <li><a href="index.html#productos">Seguir comprando</a></li>
         <li><a href="index.html#contacto">Soporte</a></li>
       </ul>
     </nav>
-    <a class="whatsapp-btn" href="https://wa.me/59897431589?text=Hola,%20vi%20su%20tienda%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20fundas%20y%20accesorios." target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">
+    <a class="whatsapp-btn" href="https://wa.me/59897431589?text=Hola,%20vi%20su%20tienda%20y%20quiero%20mas%20informacion%20sobre%20fundas%20y%20accesorios." target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">
       <img src="imagenes/whatsapp.png" alt="WhatsApp" />
     </a>
   </header>
@@ -24,8 +24,8 @@
   <main class="checkout-main" id="contenido-principal">
     <section class="checkout-hero" aria-label="Finalizar compra">
       <p class="hero-kicker">Compra segura</p>
-      <h1>Finalizá tu pedido</h1>
-      <p>Completá tus datos, elegí envío y método de pago para confirmar la compra.</p>
+      <h1>Finaliza tu pedido</h1>
+      <p>Completa tus datos, elige envio y metodo de pago para confirmar la compra.</p>
     </section>
 
     <section class="checkout-layout" aria-label="Resumen y formulario de compra">
@@ -48,7 +48,7 @@
           <strong>$<span id="checkout-subtotal">0</span></strong>
         </div>
         <div class="checkout-total-row">
-          <span>Envío</span>
+          <span>Envio</span>
           <strong id="checkout-shipping">$0</strong>
         </div>
         <div class="checkout-total-row checkout-total-final">
@@ -70,7 +70,7 @@
               <input type="email" name="email" maxlength="120" required />
             </label>
             <label>
-              Teléfono
+              Telefono
               <input type="tel" name="telefono" minlength="8" maxlength="20" required />
             </label>
             <label>
@@ -80,22 +80,41 @@
           </div>
 
           <label>
-            Dirección de entrega
+            Direccion de entrega
             <input type="text" name="direccion" minlength="6" maxlength="140" required />
           </label>
 
           <fieldset class="checkout-fieldset">
             <legend>Tipo de entrega</legend>
-            <label><input type="radio" name="envio" value="domicilio" checked /> Envío a domicilio ($120)</label>
+            <label><input type="radio" name="envio" value="domicilio" checked /> Envio a domicilio ($120)</label>
             <label><input type="radio" name="envio" value="retiro" /> Retiro en Montevideo (sin costo)</label>
           </fieldset>
 
           <fieldset class="checkout-fieldset">
-            <legend>Método de pago</legend>
+            <legend>Metodo de pago</legend>
             <label><input type="radio" name="pago" value="mercadopago" checked /> Mercado Pago</label>
-            <label><input type="radio" name="pago" value="tarjeta" /> Tarjeta de débito/crédito</label>
             <label><input type="radio" name="pago" value="transferencia" /> Transferencia bancaria</label>
           </fieldset>
+
+          <div class="checkout-payment-methods" aria-live="polite">
+            <article class="payment-panel" id="payment-panel-mercadopago">
+              <h3>Pago con Mercado Pago</h3>
+              <p>Podes pagar con saldo, tarjeta o cuotas desde Mercado Pago.</p>
+            </article>
+
+            <article class="payment-panel" id="payment-panel-transferencia" hidden>
+              <h3>Datos para transferencia</h3>
+              <ul class="transferencia-lista">
+                <li>Banco: BROU</li>
+                <li>Titular: Funda Shop</li>
+                <li>Caja de ahorro: 001-1234567</li>
+                <li>Alias: FUNDASHOP.UY</li>
+              </ul>
+              <p>Luego de transferir, envia comprobante por WhatsApp para acelerar la confirmacion.</p>
+            </article>
+          </div>
+
+          <p id="payment-link-notice" class="checkout-payment-note"></p>
 
           <label>
             Notas del pedido (opcional)
@@ -108,8 +127,10 @@
 
         <div id="checkout-confirmacion" class="checkout-confirmacion" hidden>
           <h3>Pedido confirmado</h3>
-          <p>Tu número de pedido es <strong id="checkout-order-id"></strong>.</p>
-          <p>En breve te contactamos con el estado del pago y envío.</p>
+          <p>Tu numero de pedido es <strong id="checkout-order-id"></strong>.</p>
+          <p id="checkout-payment-message" class="checkout-payment-message"></p>
+          <a id="checkout-pay-online" class="cta" href="#" target="_blank" rel="noopener noreferrer" hidden>Pagar ahora</a>
+          <p>En breve te contactamos con el estado del pago y envio.</p>
           <a id="checkout-whatsapp" class="btn-contacto-modal" href="#" target="_blank" rel="noopener noreferrer">Enviar pedido por WhatsApp</a>
         </div>
       </article>

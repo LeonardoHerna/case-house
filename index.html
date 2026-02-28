@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="es-UY">
 <head>
+  <!-- Metadatos base del sitio -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Funda Shop | Fundas y Accesorios para Celular en Uruguay</title>
@@ -23,6 +24,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Header con branding, navegacion y acceso directo a WhatsApp -->
   <header class="header" role="banner">
     <div class="logo" aria-label="Funda Shop">Funda Shop</div>
 
@@ -32,9 +34,25 @@
       <span></span>
     </button>
 
+    <!-- Navegacion principal (desktop y mobile) -->
     <nav id="mobile-menu" aria-label="Navegación principal">
       <ul>
-        <li><a href="#productos">Productos</a></li>
+        <li class="nav-products">
+          <button
+            type="button"
+            class="nav-dropdown-toggle"
+            aria-expanded="false"
+            aria-controls="productos-categorias"
+          >
+            Productos
+          </button>
+          <ul id="productos-categorias" class="nav-submenu" aria-label="Categorías de productos">
+            <li><a href="#productos">Fundas iPhone</a></li>
+            <li><a href="#productos">Fundas Samsung</a></li>
+            <li><a href="#productos">Soportes para auto</a></li>
+            <li><a href="#productos">Accesorios premium</a></li>
+          </ul>
+        </li>
         <li><a href="#beneficios">Beneficios</a></li>
         <li><a href="#resenas">Reseñas</a></li>
         <li><a href="#nosotros">Sobre nosotros</a></li>
@@ -49,6 +67,7 @@
   </header>
 
   <main id="contenido-principal">
+    <!-- Hero principal -->
     <section class="hero" aria-label="Presentación principal">
       <div class="hero-content">
         <p class="hero-kicker">Tienda uruguaya</p>
@@ -76,6 +95,7 @@
       </div>
     </section>
 
+    <!-- Modal de coleccion de productos -->
     <div class="overlay" id="overlay" aria-hidden="true">
       <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
         <button id="cerrarModal" class="cerrar-btn" aria-label="Cerrar colección">&times;</button>
@@ -141,22 +161,25 @@
       </div>
     </div>
 
+    <!-- Listado principal de productos -->
     <section id="productos" class="productos">
       <h2>Productos destacados</h2>
       <div class="productos-grid"></div>
       <button id="ver-mas-productos" class="ver-mas-btn" type="button">Ver más productos</button>
     </section>
 
+    <!-- Seccion de beneficios comerciales -->
     <section class="beneficios" id="beneficios">
       <h2>¿Por qué elegirnos?</h2>
       <ul>
-        <li>Fundas para todos los modelos</li>
+        <li>Fundas y accesorios para todos los modelos</li>
         <li>Envíos rápidos a todo Uruguay</li>
         <li>Precios competitivos y promociones</li>
         <li>Atención personalizada por WhatsApp</li>
       </ul>
     </section>
 
+    <!-- Seccion de reseñas -->
     <section class="resenas" id="resenas" aria-labelledby="titulo-resenas">
       <div class="container">
         <h2 id="titulo-resenas">Lo que dicen nuestros clientes</h2>
@@ -165,6 +188,7 @@
       </div>
     </section>
 
+    <!-- Presentacion institucional de la marca -->
     <section class="sobre-nosotros" id="nosotros">
       <div class="container">
         <h2>Sobre nosotros</h2>
@@ -176,6 +200,7 @@
       </div>
     </section>
 
+    <!-- Preguntas frecuentes en formato acordeon -->
     <section class="faq" id="faq">
       <div class="container">
         <h2>Preguntas frecuentes</h2>
@@ -210,6 +235,7 @@
       </div>
     </section>
 
+    <!-- Formulario de contacto -->
     <section id="contacto" class="contacto">
       <h2>¿Tenés dudas o querés hacer un pedido?</h2>
       <p>Escribinos directamente por WhatsApp o completá el siguiente formulario.</p>
@@ -226,6 +252,7 @@
     </section>
   </main>
 
+  <!-- Footer con redes y legal -->
   <footer class="footer" role="contentinfo">
     <div class="footer-container">
       <p>&copy; 2026 <strong>Funda Shop</strong> - Todos los derechos reservados.</p>
@@ -244,10 +271,12 @@
     </div>
   </footer>
 
+  <!-- Boton flotante para volver al inicio -->
   <button id="btnSubirArriba" title="Volver arriba" aria-label="Subir arriba">
     <img src="imagenes/flecha-hacia-arriba.png" alt="Subir arriba" />
   </button>
 
+  <!-- Datos estructurados para SEO local -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -268,6 +297,7 @@
     }
   </script>
 
+  <!-- Logica principal del frontend -->
   <script src="script.js"></script>
 </body>
 </html>
